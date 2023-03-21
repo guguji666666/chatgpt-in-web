@@ -1,4 +1,4 @@
-## Create chatgpt in web
+## Create CHATGPT-Web
 #### 1. [Create Azure VM running Linux (Ubuntu 20.04)](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal)
 #### 2. Update apt package manager
 ```
@@ -34,7 +34,23 @@ services:
       OPENAI_API_KEY: <Your API key>
 ```
 
+#### 5. Apply DNS to your server running CHATGPT service
+1. Make sure you have a custom domain
+2. Add DNS `A` record in your DNS provider, point `FQDN` to your Azure VM's IP
+```
+For example,
+You bought Domain "abc.com" from DNS provider.
+Then you create FQDN "test.abc.com" for your Azure VM.
+DNS A record > points "test.abc.com" to the IP of Azure VM.
+```
+3. How to get your custom domain
+* [Get custom domain from Aliyun](https://wanwang.aliyun.com/domain/)
 
+* [Manage your custom domain in Aliyun](https://account.aliyun.com/login/login.htm?oauth_callback=http%3A%2F%2Fdc.console.aliyun.com%2Fnext%2Findex%3Fspm%3D5176.2020520207.recommends.ddomain.606c4c12SpdlTJ#/domain/list/all-domain)
+
+* [Get custom domain from Tecent](https://cloud.tencent.com/act/pro/domain_sales?fromSource=gwzcw.6927084.6927084.6927084&utm_medium=cpc&utm_id=gwzcw.6927084.6927084.6927084&bd_vid=11313871833741623980)
+
+* [Manage your custom domain in Tecent](https://cloud.tencent.com/login?s_url=https%3A%2F%2Fc)
 
 #### 5. Create certificate for your DNS
 ```sh
