@@ -73,9 +73,9 @@ curl https://get.acme.sh | sh
 #### 8. Modify nginx config file
 ```sh
 cd /home/nginx/ && nano nginx.conf
-``
-
 ```
+
+```sh
 events {
 
     worker_connections  1024;
