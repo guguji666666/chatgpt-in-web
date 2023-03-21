@@ -52,7 +52,7 @@ DNS A record > points "test.abc.com" to the IP of Azure VM.
 
 * [Manage your custom domain in Tecent](https://cloud.tencent.com/login?s_url=https%3A%2F%2Fc)
 
-#### 5. Create certificate for your DNS
+#### 6. Create certificate for your DNS
 ```sh
 curl https://get.acme.sh | sh
 ```
@@ -65,8 +65,70 @@ curl https://get.acme.sh | sh
 ```sh
 ~/.acme.sh/acme.sh --issue -d <FQDN of the Azure VM> --standalone
 ```
-#### 6. Download the cert created
+#### 7. Download the cert created
 ```sh
 ~/.acme.sh/acme.sh --installcert -d gpt.kjlion.ga  --key-file /home/nginx/certs/key.pem --fullchain-file /home/nginx/certs/cert.pem
 ```
 
+#### 8. Modify nginx config file
+```sh
+cd /home/nginx/ && nano nginx.conf
+``
+
+```
+events {
+
+    worker_connections  1024;
+
+}
+
+
+
+http {
+
+
+
+  client_max_body_size 1000m;  
+
+
+  #上传限制参数1G以内文件可上传
+
+
+  server {
+
+    listen 80;
+
+    server_name <Your custom DNS>;
+
+    return 301 https://$host$request_uri;
+
+  }
+
+
+
+  server {
+
+    listen 443 ssl http2;
+
+    server_name gpt.kjlion.ga;
+
+    ssl_certificate /etc/nginx/certs/cert.pem;
+
+    ssl_certificate_key /etc/nginx/certs/key.pem;
+
+    location / {
+
+      proxy_pass http://<IP of VPS server>:3002;
+
+      proxy_set_header Host $host;
+
+      proxy_set_header X-Real-IP $remote_addr;
+
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    }
+
+  }
+
+}
+```
