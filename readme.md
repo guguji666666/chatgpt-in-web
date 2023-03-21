@@ -132,3 +132,8 @@ http {
 
 }
 ```
+
+#### 9. Start ngix
+```sh
+docker run -d --name nginx -p 80:80 -p 443:443 -v /home/nginx/nginx.conf:/etc/nginx/nginx.conf -v /home/nginx/certs:/etc/nginx/certs -v /home/nginx/html:/usr/share/nginx/html nginx:latest
+```
