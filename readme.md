@@ -1,5 +1,5 @@
 ## Create ChatGPT-Web
-#### 1. [Create Azure VM running Linux (Ubuntu 20.04)](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal)
+#### 1. [Create Azure VM running Linux](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal)(In the lab we use Ubuntu 20.04)
 #### 2. Update apt package manager
 ```
 apt update -y  && apt upgrade -y && apt install -y curl wget sudo socat
